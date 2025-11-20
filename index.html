@@ -1,116 +1,14 @@
 
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>မြတ်မင်းသန့်ရဲ့ website</title>
+<head   <title>မြတ်မင်းသန့်ရဲ့ website</title>
   <h2>မြတ်မင်းသန့် website မှ အားလုံးကိုကြိုဆိုပါတယ်</h2>
-    <style>
-        body { font-family: Arial; padding: 20px; }
-        #loginBox, #registerBox, #chatBox { border: 1px solid #333; padding: 15px; width: 300px; margin-bottom: 20px; }
-        #messages { border: 1px solid #555; height: 200px; overflow-y: scroll; padding: 10px; background: #f2f2f2; }
-    </style>
-</head>
-<body>
-
-<h2>Register</h2>
-<div id="registerBox">
-    <input id="regUser" type="text" placeholder="Username"><br><br>
-    <input id="regPass" type="password" placeholder="Password"><br><br>
-    <button onclick="register()">Register</button>
-</div>
-
-<h2>Login</h2>
-<div id="loginBox">
-    <input id="logUser" type="text" placeholder="Username"><br><br>
-    <input id="logPass" type="password" placeholder="Password"><br><br>
-    <button onclick="login()">Login</button>
-</div>
-
-<div id="chatBox" style="display:none;">
-    <h3>Public Chat Box</h3>
-    <div id="messages"></div><br>
-    <input id="msg" type="text" placeholder="Type message" style="width:80%;">
-    <button onclick="sendMessage()">Send</button>
-</div>
-
-<script>
-    // Save Accounts
-    function register() {
-        let user = document.getElementById("regUser").value;
-        let pass = document.getElementById("regPass").value;
-
-        if (user === "" || pass === "") {
-            alert("Fill all fields");
-            return;
-        }
-
-        if (localStorage.getItem(user)) {
-            alert("Account already exists");
-        } else {
-            localStorage.setItem(user, pass);
-            alert("Account Registered");
-        }
-    }
-
-    // Login System
-    function login() {
-        let user = document.getElementById("logUser").value;
-        let pass = document.getElementById("logPass").value;
-
-        if (localStorage.getItem(user) === pass) {
-            alert("Login Successful");
-            localStorage.setItem("currentUser", user);
-            document.getElementById("chatBox").style.display = "block";
-        } else {
-            alert("Wrong username or password");
-        }
-    }
-
-    // Load messages
-    window.onload = function() {
-        loadMessages();
-    }
-
-    function loadMessages() {
-        let chat = JSON.parse(localStorage.getItem("publicChat") || "[]");
-        let msgBox = document.getElementById("messages");
-        msgBox.innerHTML = "";
-        chat.forEach(m => {
-            msgBox.innerHTML += `<p><strong>${m.user}</strong>: ${m.text}</p>`;
-        });
-    }
-
-    // Send message
-    function sendMessage() {
-        let text = document.getElementById("msg").value;
-        let user = localStorage.getItem("currentUser");
-
-        if (!user) {
-            alert("You must login first");
-            return;
-        }
-
-        let chat = JSON.parse(localStorage.getItem("publicChat") || "[]");
-        chat.push({ user: user, text: text });
-        localStorage.setItem("publicChat", JSON.stringify(chat));
-        document.getElementById("msg").value = "";
-        loadMessages();
-    }
-</script>
-
-</body>
-</html>
+    
 
 
 
 
 
 
-
-<!DOCTYPE html>
-
-<html>
+<
 <head>
   <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
   <title>ဒီ software, website ကိုတည်ထောင်သူသည် မြတ်မင်းသန့် မဟာ အလက်ဇန်းဒါးဖြစ်ပါသည်
@@ -122,170 +20,111 @@
     ကဲ ဘယ်လောက်သူတော်လဲ။အသက် 17 နှစ်နဲ့ Facebookကဲ့သို့ social networkတစ်ခုကိုဖန်တီးနိုင်ပြီ
     သူသည် ယခု Edu - lab တွင် grade 8 တွင် ပညာသင်ကြားနေဆဲဖြစ်ပါသည်
   </h1>
-</body>
-</html>
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Simple Social Media App (HTML Only)</title>
-<style>
-  body { font-family: Arial, sans-serif; margin: 0; background: #f0f2f5; }
-  .container { max-width: 600px; margin: auto; padding: 20px; }
-  .card { background: #fff; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
-  input, button { width: 100%; padding: 10px; margin-top: 10px; }
-  button { background: #1877f2; color: #fff; border: none; cursor: pointer; border-radius: 6px; }
-  .nav { display: flex; gap: 10px; margin-bottom: 20px; }
-  .post { background: #fff; padding: 15px; border-radius: 10px; margin-bottom: 15px; }
-  .post img { max-width: 100%; border-radius: 10px; margin-top: 10px; }
-  .search-box input { width: 100%; padding: 10px; }
-</style>
+    <title>Public Chat Box</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .chat-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 50px auto;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px #999;
+        }
+
+        #chatBox {
+            height: 350px;
+            border: 1px solid #ccc;
+            background: #fafafa;
+            padding: 10px;
+            overflow-y: scroll;
+            border-radius: 5px;
+        }
+
+        .input-area {
+            margin-top: 15px;
+            display: flex;
+        }
+
+        #messageInput {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-left: 10px;
+            background: royalblue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: dodgerblue;
+        }
+    </style>
 </head>
 <body>
 
-<div class="container">
+<div class="chat-container">
 
-  <!-- LOGIN PAGE -->
-  <div id="loginPage" class="card">
-    <h2>Login</h2>
-    <input id="login_user" placeholder="Username" />
-    <input id="login_pass" type="password" placeholder="Password" />
-    <button onclick="login()">Login</button>
-    <p>Don't have an account? <a href="#" onclick="showRegister()">Register</a></p>
-  </div>
+    <h2>Public Chat</h2>
 
-  <!-- REGISTER PAGE -->
-  <div id="registerPage" class="card" style="display:none;">
-    <h2>Register</h2>
-    <input id="reg_user" placeholder="Username" />
-    <input id="reg_pass" type="password" placeholder="Password" />
-    <button onclick="register()">Create Account</button>
-    <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
-  </div>
+    <!-- Chat Messages -->
+    <div id="chatBox"></div>
 
-  <!-- MAIN APP PAGE -->
-  <div id="appPage" style="display:none;">
-    <div class="nav">
-      <button onclick="showUploader()">Upload Post</button>
-      <button onclick="showFeed()">Home</button>
-      <button onclick="showSearch()">Search</button>
-      <button onclick="logout()">Logout</button>
+    <!-- Input -->
+    <div class="input-area">
+        <input type="text" id="messageInput" placeholder="Write message...">
+        <button onclick="sendMessage()">Send</button>
     </div>
-
-    <!-- UPLOAD POST -->
-    <div id="uploadBox" class="card" style="display:none;">
-      <h3>Create Post</h3>
-      <input id="post_title" placeholder="Post Title" />
-      <input id="post_photo" type="file" accept="image/*" />
-      <button onclick="uploadPost()">Upload</button>
-    </div>
-
-    <!-- FEED -->
-    <div id="feed" class="card"></div>
-
-    <!-- SEARCH -->
-    <div id="searchBox" class="card" style="display:none;">
-      <h3>Search Posts</h3>
-      <input id="search_input" placeholder="Search title..." oninput="searchPosts()" />
-      <div id="search_results"></div>
-    </div>
-
-  </div>
 
 </div>
 
 <script>
-// Load users & posts
-let users = JSON.parse(localStorage.getItem("users") || "{}");
-let posts = JSON.parse(localStorage.getItem("posts") || "[]");
-let currentUser = localStorage.getItem("currentUser");
+    // Load saved messages from localStorage
+    let messages = JSON.parse(localStorage.getItem("chatMessages")) || [];
 
-// Switch Pages
-function showLogin(){ document.getElementById('loginPage').style.display='block'; document.getElementById('registerPage').style.display='none'; }
-function showRegister(){ document.getElementById('loginPage').style.display='none'; document.getElementById('registerPage').style.display='block'; }
-function showUploader(){ hideAll(); document.getElementById('uploadBox').style.display='block'; }
-function showFeed(){ hideAll(); renderFeed(); }
-function showSearch(){ hideAll(); document.getElementById('searchBox').style.display='block'; }
-function hideAll(){ document.getElementById('uploadBox').style.display='none'; document.getElementById('feed').style.display='block'; document.getElementById('searchBox').style.display='none'; }
+    function displayMessages() {
+        const chatBox = document.getElementById("chatBox");
+        chatBox.innerHTML = "";
+        messages.forEach(msg => {
+            chatBox.innerHTML += "<p>" + msg + "</p>";
+        });
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
 
-// Register
-function register() {
-  let u = reg_user.value.trim();
-  let p = reg_pass.value;
-  if(!u || !p) return alert("Fill all fields");
-  if(users[u]) return alert("Username already exists");
-  users[u] = p;
-  localStorage.setItem("users", JSON.stringify(users));
-  alert("Account created!");
-  showLogin();
-}
+    // Send Message
+    function sendMessage() {
+        const input = document.getElementById("messageInput");
+        const text = input.value.trim();
 
-// Login
-function login() {
-  let u = login_user.value.trim();
-  let p = login_pass.value;
-  if(users[u] && users[u] === p){
-    currentUser = u;
-    localStorage.setItem("currentUser", u);
-    loginPage.style.display='none';
-    registerPage.style.display='none';
-    appPage.style.display='block';
-    renderFeed();
-  } else {
-    alert("Incorrect login");
-  }
-}
+        if (text === "") return;
 
-// Logout
-function logout(){ localStorage.removeItem("currentUser"); location.reload(); }
+        messages.push(text);
 
-// Upload Post
-function uploadPost(){
-  let title = post_title.value.trim();
-  let file = post_photo.files[0];
-  if(!title || !file) return alert("Fill all fields");
+        localStorage.setItem("chatMessages", JSON.stringify(messages));
 
-  let reader = new FileReader();
-  reader.onload = function(){
-    posts.unshift({ user: currentUser, title: title, img: reader.result, time: Date.now() });
-    localStorage.setItem("posts", JSON.stringify(posts));
-    alert("Posted!");
-    showFeed();
-  }
-  reader.readAsDataURL(file);
-}
+        input.value = "";
+        displayMessages();
+    }
 
-// Render Feed
-function renderFeed(){
-  feed.innerHTML = '';
-  posts.forEach(p => {
-    feed.innerHTML += `
-      <div class='post'>
-        <b>@${p.user}</b><br>
-        <span>${p.title}</span><br>
-        <img src="${p.img}" />
-      </div>
-    `;
-  });
-}
-
-// Search Posts
-function searchPosts(){
-  let q = search_input.value.toLowerCase();
-  let result = posts.filter(p => p.title.toLowerCase().includes(q));
-
-  search_results.innerHTML = result.map(p => `
-    <div class='post'>
-      <b>@${p.user}</b><br>
-      ${p.title}<br>
-      <img src="${p.img}" />
-    </div>
-  `).join('');
-}
-
-// If already logged in
-if(currentUser){ loginPage.style.display='none'; registerPage.style.display='none'; appPage.style.display='block'; renderFeed(); }
+    // Display saved chat on page load
+    displayMessages();
 </script>
 
 </body>
